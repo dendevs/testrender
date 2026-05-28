@@ -1,11 +1,11 @@
 import { envelopeService } from "../services/envelopes.service.js";
 
-const create = (req, res) => {
-  const envelope = envelopeService.create(req.body);
-  res.json(envelope);
+const create = async (req, res) => {
+  const envelope = await envelopeService.create(req.body);
+  res.status(201).json(envelope);
 };
 
-const getAll = (req, res) => {
+const getAll = (_, res) => {
   const envelopes = envelopeService.getAll();
   res.status(200).json(envelopes);
 };
@@ -35,7 +35,7 @@ const remove = (req, res) => {
 };
 
 const transfer = (req, res) => {
-  const envelopes = envelopeService.transfert(
+  const envelopes = envelopeService.transfer(
     req.body.from,
     req.body.to,
     req.body.amount,

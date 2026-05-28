@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import database from "../db/database.js";
 
 let envelopes = [];
 
@@ -27,18 +27,14 @@ const _getEnvelopeIndexById = (envelopeId) => {
 };
 
 /* Api */
-const create = (data) => {
-  const envelope = {
-    id: randomUUID(),
-    at: Date.now(),
-    ...data,
-  };
-
-  envelopes.push(envelope);
+const create = async ({ title, amount, at, data }) => {
+  const envelope = await database.createEnvelope(title, amount, at, data);
   return envelope;
 };
 
 const getAll = () => {
+  envelopes = database.getAllEnvelopes();
+  console.log(envelopes);
   return envelopes;
 };
 
@@ -80,6 +76,7 @@ const transfer = (from, to, amout) => {
   //envelopes.push(
 };
 
+// TODO export default
 export const envelopeService = {
   create,
   getAll,
