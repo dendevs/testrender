@@ -14,7 +14,7 @@
   "scripts": {
     "test": "vitest",
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "type": "module",
   "author": "dendev",
